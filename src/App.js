@@ -1,11 +1,20 @@
 
 import './App.css';
+import AddTask from './add'
+import Nav from './nav'
+import SideBar from './sidebar'
+
 
 function App() {
   return (
-    <div className="bg-blue-500 text-white p-4">
-        <h1>Hello World Testing the New App</h1>
+    <div>
+    <Nav />
+    <div className="flex">
+      <SideBar />
+      <AddTask />
     </div>
+   
+  </div>
   );
 }
 
