@@ -1,18 +1,21 @@
 import React from 'react'
+import TaskList from './TaskList'
 
 export default function Add() {
     const [addTask, setAddTask] = React.useState('')
+    const [tasks, setTasks] = React.useState([])
     
 
     function handleTaskSubmit(e){
         e.preventDefault()
-       
+       setTasks([...tasks, addTask]);
+       setAddTask('');
     }
 
     const handleTaskChange = (e) => {
         setAddTask(e.target.value)
     }
-    console.log(addTask)
+    
 
     return(
         <div>
@@ -31,7 +34,7 @@ export default function Add() {
                 
                 </button>
             </form>
-            
+            <TaskList tasks={tasks} />
         </div>
     )
 }
