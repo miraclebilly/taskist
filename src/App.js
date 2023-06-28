@@ -1,6 +1,6 @@
 
 import './App.css';
-import AddTask from './add'
+import Main from './Main'
 import Nav from './nav'
 import SideBar from './sidebar'
 
@@ -11,7 +11,7 @@ function App() {
     <Nav />
     <div className="flex">
       <SideBar />
-      <AddTask />
+      <Main />
     </div>
    
   </div>

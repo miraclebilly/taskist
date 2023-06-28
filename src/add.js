@@ -1,18 +1,21 @@
 import React from 'react'
 
-export default function Add() {
+
+export default function Add({onAdd}) {
     const [addTask, setAddTask] = React.useState('')
+    
     
 
     function handleTaskSubmit(e){
         e.preventDefault()
-       
+       onAdd(addTask)
+       setAddTask('');
     }
 
     const handleTaskChange = (e) => {
         setAddTask(e.target.value)
     }
-    console.log(addTask)
+    
 
     return(
         <div>
