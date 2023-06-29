@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TaskList({tasks, onEdit}) {
+export default function TaskList({tasks, onEdit, deleteTask}) {
     const [editTask, setEditTask] = React.useState('');
 
     const handleEditTask = (index) => {
@@ -29,7 +29,14 @@ export default function TaskList({tasks, onEdit}) {
                             />
                             <button onClick={() => handleUpdateTask(index)}>Update</button>
                         </>
-                    )}                    
+                    )} 
+
+                </li>
+                ))}
+
+                {tasks.map((task)=> (
+                    <li key={task.id}>
+                    <button onClick={() => deleteTask(task.id)}>Delete</button>
                 </li>
                 ))}
             </ul>
