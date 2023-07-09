@@ -16,15 +16,15 @@ export default function Add({onAdd}) {
         setAddTask(e.target.value)
     }
     
-
     return(
-        <div>
+        <div className="flex justify-center items-top">
             <form onSubmit={handleTaskSubmit}>
                 <textarea 
                     placeholder="Please enter Task" 
                     name={addTask} 
                     value={addTask}              
-                    onChange={handleTaskChange}              
+                    onChange={handleTaskChange} 
+                    className="w-full h-40 p-2 border border-gray-400"             
                 >
                 </textarea>
                 <button type="submit" 

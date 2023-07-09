@@ -1,45 +1,60 @@
-import React from 'react'
+import React from 'react';
 
-export default function TaskList({tasks, onEdit, deleteTask}) {
-    const [editTask, setEditTask] = React.useState('');
+export default function TaskList({ tasks, onEdit, deleteTask }) {
+  const [editTask, setEditTask] = React.useState('');
+  const [editIndex, setEditIndex] = React.useState(null);
 
-    const handleEditTask = (index) => {
-        setEditTask(tasks[index]);
-    };
+  const handleEditTask = (index) => {
+    setEditTask(tasks[index]);
+    setEditIndex(index);
+  };
 
-    const handleUpdateTask = (index) => {
-        onEdit(index, editTask);
-        setEditTask('');
-    }
+  const handleUpdateTask = () => {
+    onEdit(editIndex, editTask);
+    setEditTask('');
+    setEditIndex(null);
+  };
 
-    return(
-        <div>
-            <h2>TaskList:</h2>
-            <ul>
-                {tasks.map((task, index) => (
-                <li key={index}>
-                    {task}
-                    <button onClick={() => handleEditTask(index)}>Edit</button>
-                    {editTask && (
-                        <>
-                            <input 
-                                type="text"
-                                value={editTask}
-                                onChange={(e)=> setEditTask(e.target.value)}
-                            />
-                            <button onClick={() => handleUpdateTask(index)}>Update</button>
-                        </>
-                    )} 
+  const handleDeleteTask = (index) => {
+      deleteTask(index);
+  };
 
-                </li>
-                ))}
+  return (
+    <div className="mt-4 flex justify-center items-center">
+      <h2>TaskList:</h2>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            {editIndex === index ? (
+              <>
+                <input
+                  type="text"
+                  value={editTask}
+                  onChange={(e) => setEditTask(e.target.value)}
+                />
+                <button onClick={handleUpdateTask}>Update</button>
+              </>
+            ) : (
+              <>
+                {task}
+                <button
+                  onClick={() => handleEditTask(index)}
+                  className="bg-blue-500 text-white rounded-md"
+                >
+                  Edit
+                </button>
+              </>
+            )}
 
-                {tasks.map((task)=> (
-                    <li key={task.id}>
-                    <button onClick={() => deleteTask(task.id)}>Delete</button>
-                </li>
-                ))}
-            </ul>
-        </div>
-    )
+            <button
+              onClick={() => handleDeleteTask(index)}
+              className="bg-red-500 text-white px-2 py-1 rounded-md"
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
