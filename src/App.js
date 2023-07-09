@@ -1,19 +1,40 @@
 
+import React from 'react'
 import './App.css';
-import Main from './Main'
 import Nav from './nav'
-import SideBar from './sidebar'
+import TaskList from './TaskList'
+import Add from './Add'
+
 
 
 function App() {
+  const [tasks, setTasks] = React.useState([]);
+ 
+
+    const handleAddTask = (task) => {
+        setTasks([...tasks, task]);
+    };
+
+    const handleEditTask= (index, editedTask) => {
+        const updatedTasks = [...tasks];
+        updatedTasks[index] = editedTask;
+        setTasks(updatedTasks);
+    }
+
+    const deleteTask = (index) => {
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+    };
+
+    
+
   return (
     <div>
-    <Nav />
-    <div className="flex">
-      <SideBar />
-      <Main />
-    </div>
-   
+      <Nav />
+            <Add onAdd={handleAddTask}/> 
+            <TaskList tasks={tasks} onEdit={handleEditTask} deleteTask={deleteTask}/> 
+      
   </div>
   );
 }
