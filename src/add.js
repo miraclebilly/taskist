@@ -17,7 +17,7 @@ export default function Add({onAdd}) {
     }
     
     return(
-        <div className="flex justify-center items-top">
+        <div className="flex justify-center items-top mt-8">
             <form onSubmit={handleTaskSubmit}>
                 <textarea 
                     placeholder="Please enter Task" 
