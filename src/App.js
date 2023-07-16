@@ -38,8 +38,13 @@ function App() {
   return (
     <div>
       <Nav />
+      
       <Add onAdd={handleAddTask} />
-      {tasks && <TaskList tasks={tasks} onEdit={handleEditTask} deleteTask={deleteTask} />}
+      {tasks && 
+        <TaskList 
+            tasks={tasks} 
+            onEdit={handleEditTask} 
+            deleteTask={deleteTask} />}
     </div>
   );
 }
