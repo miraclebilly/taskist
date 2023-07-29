@@ -1,12 +1,13 @@
 // TaskList.js
-
+import './App'
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted }) {
+export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted, setTasks }) {
   const [editTaskName, setEditTaskName] = React.useState('');
   const [idToEdit, setIdToEdit] = React.useState(null);
+  const [draggedTaskId, setDraggedTaskId]  = React.useState(null);
 
   const pendingTasks = tasks.filter(task => !task.completed);
   const completedTasks = tasks.filter(task => task.completed);
@@ -27,14 +28,25 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted })
     deleteTask(taskId);
   };
 
+  const onTaskDrop = () => {
+
+    toggleCompleted(draggedTaskId)
+  }
+
+  
+
   return (
     <div>
       <main className="flex justify-center pt-20">
-        <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4">
+        <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4 ">
           <h1 className="font-bold mb-4">Pending Task</h1>
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 ">
             {pendingTasks.map(task => (
-              <div key={task.id} className="flex items-center group"> {/* Added 'group' class here */}
+              <div key={task.id} 
+                className="flex items-center group drop-zone"
+                draggable
+                onDragStart={(e) => setDraggedTaskId(task.id)}
+              > 
                 <input
                   type="checkbox"
                   checked={task.completed}
@@ -51,7 +63,7 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted })
                     />
                     <button
                       onClick={() => handleUpdateTask(task.id)}
-                      className="bg-green-500 text-white px-2 py-1 rounded text-sm"
+                      className="bg-green-500 text-black px-2 py-1 rounded text-sm"
                     >
                       <FontAwesomeIcon icon={faCheck} />
                     </button>
@@ -63,13 +75,13 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted })
                     </span>
                     <button
                       onClick={() => handleEditTask(task.id)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity" // Added 'opacity' classes here
+                      className="text-sm opacity-0 group-hover:opacity-100 transition-opacity" // Added 'opacity' classes here
                     >
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
                     <button
                       onClick={() => handleDeleteTask(task.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity" // Added 'opacity' classes here
+                      className="text-sm opacity-0 group-hover:opacity-100 transition-opacity" // Added 'opacity' classes here
                     >
                       <FontAwesomeIcon icon={faTrash} />
                     </button>
@@ -82,11 +94,14 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted })
        
               {/* Completed Task */}
 
-        <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4">
+        <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4" onDrop={onTaskDrop} onDragOver={(e) => e.preventDefault()}>
           <h1 className="font-bold mb-4">Completed Task</h1>
           <div className="flex flex-col space-y-2">
             {completedTasks.map(task => (
-              <div key={task.id} className="flex items-center">
+              <div 
+                key={task.id} 
+                className="flex items-center"
+                >
                 <input
                   type="checkbox"
                   checked={task.completed}
@@ -95,7 +110,7 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted })
                 <span className="line-through">{task.name}</span>
                 <button
                   onClick={() => handleDeleteTask(task.id)}
-                  className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                  className="px-2 py-1 rounded ml-2"
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
@@ -107,6 +122,5 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted })
     </div>
   );
        
-
   
 }

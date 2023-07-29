@@ -62,7 +62,9 @@ function App() {
             tasks={tasks} 
             onEdit={handleEditTask}
             toggleCompleted={toggleCompleted} 
-            deleteTask={deleteTask} />}
+            deleteTask={deleteTask} 
+            setTasks={setTasks}
+            />}
     </div>
   );
 }
