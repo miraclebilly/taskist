@@ -32,7 +32,9 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted, s
     toggleCompleted(draggedTaskId)
   }
 
-  
+  const sortedCompletedTasks = [...completedTasks].sort((taskA, taskB) =>
+    (taskB.completedAt || 0) - (taskA.completedAt || 0)
+  );
 
   return (
     <div>
@@ -96,7 +98,7 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted, s
         <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4" onDrop={onTaskDrop} onDragOver={(e) => e.preventDefault()}>
           <h1 className="font-bold mb-4">Completed Task</h1>
           <div className="flex flex-col space-y-2">
-            {completedTasks.map(task => (
+            {sortedCompletedTasks.map(task => (
               <div 
                 key={task.id} 
                 className="flex items-center"

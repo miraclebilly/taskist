@@ -31,6 +31,7 @@ function App() {
     setTasks([...tasks, { name: taskName, completed: false, id: getRandomizedNumber() }]);
   };
 
+
   const handleEditTask = (id, editedTaskName) => {
     const index =  tasks.findIndex(task => task.id === id);
     const task = tasks[index];
@@ -52,6 +53,7 @@ function App() {
     const index = tasks.findIndex(task => task.id === id);
     const task = tasks[index];
     task.completed = !task.completed;
+    task.completedAt = task.completed ? Date.now() : null;
     setTasks([...tasks.slice(0, index), task, ...tasks.slice(index + 1)])
   }
 
