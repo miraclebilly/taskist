@@ -1,10 +1,9 @@
 // TaskList.js
-import './App'
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted, setTasks }) {
+export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted, setTasks, darkMode }) {
   const [editTaskName, setEditTaskName] = React.useState('');
   const [idToEdit, setIdToEdit] = React.useState(null);
   const [draggedTaskId, setDraggedTaskId]  = React.useState(null);
@@ -38,7 +37,7 @@ export default function TaskList({ tasks, onEdit, deleteTask, toggleCompleted, s
   return (
     <div>
       <main className="flex justify-center pt-20">
-        <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4 ">
+        <div className="border rounded w-1/4 ml-8 h-80 mt-4 p-4">
           <h1 className="font-bold mb-4">Pending Task</h1>
           <div className="flex flex-col space-y-2 ">
             {pendingTasks.map(task => (

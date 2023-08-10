@@ -4,11 +4,14 @@ import Nav from './nav';
 import TaskList from './TaskList';
 import Add from './Add';
 
+
+
 const getRandomizedNumber = () => (new Date()).getMilliseconds() * Math.round(Math.random() * 10000);
 
 function App() {
   const [tasks, setTasks] = React.useState(null);
   // [ { name: "Sleep", completed: false, id:  }, ... ]
+  // const [darkMode, setDarkMode] = React.useState(false)
 
   useEffect(() => {
     if (tasks === null) {
@@ -31,7 +34,7 @@ function App() {
   const handleEditTask = (id, editedTaskName) => {
     const index =  tasks.findIndex(task => task.id === id);
     const task = tasks[index];
-    task.name = editedTaskName
+    task.name = editedTaskName;
     //const updatedTasks = [...tasks];
     //updatedTasks[index] = originalTask;
     //setTasks(updatedTasks);
@@ -52,10 +55,33 @@ function App() {
     setTasks([...tasks.slice(0, index), task, ...tasks.slice(index + 1)])
   }
 
+  // const toggleDarkMode = () => {
+  //   setDarkMode(prevDarkMode => !prevDarkMode)
+  // }
+
+// In your App.js
+// useEffect(() => {
+//   if (darkMode) {
+//     const link = document.createElement('link');
+//     link.href = './dark-mode.css';
+//     link.rel = 'stylesheet';
+//     document.head.appendChild(link);
+//   } else {
+//     // Remove the dark mode CSS link if previously added
+//     const darkModeLink = document.querySelector('link[href="./dark-mode.css"]');
+//     if (darkModeLink) {
+//       darkModeLink.remove();
+//     }
+//   }
+// }, [darkMode]);
+
+
   return (
     <div>
-      <Nav />
-      
+      <Nav 
+       
+      />
+     
       <Add onAdd={handleAddTask} />
       {tasks && 
         <TaskList 
@@ -64,7 +90,9 @@ function App() {
             toggleCompleted={toggleCompleted} 
             deleteTask={deleteTask} 
             setTasks={setTasks}
+            
             />}
+          
     </div>
   );
 }

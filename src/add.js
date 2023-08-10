@@ -15,6 +15,8 @@ export default function Add({onAdd}) {
     const handleTaskChange = (e) => {
         setAddTask(e.target.value)
     }
+
+
     
     return(
         <div className="flex justify-center items-top mt-8">
@@ -29,7 +31,7 @@ export default function Add({onAdd}) {
                 >
                 </input>
                 <button type="submit" 
-                    className="bg-blue-500 text-white px-2 py-2 rounded-md ml-2 pr-3"
+                    className="add-button"
                 >
                     Add Task
                 
