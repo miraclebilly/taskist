@@ -7,7 +7,17 @@ module.exports = {
       '0': '0',
       '2' : '2px'
     },
-    extend: {},
+    extend: {
+      colors: {
+        dark: {
+          primary: '#333'
+        },
+        light: {
+          primary: '#fff'
+        },
+      },
+    },
   },
   plugins: [],
+  darkMode: "class"
 }
